@@ -1,0 +1,42 @@
+-- SECTION 2
+
+    -- 1).
+    
+    create table TEMPP(b char(12));
+    drop table TEMPP;
+    delimiter //
+    create procedure PROC1(s1 varchar(20),s2 varchar(20))
+    begin
+			declare x boolean;
+            set x = locate(s1,s2);
+            if x > 0 then
+            insert into TEMPP values('EXISTS');
+			else 
+            insert into TEMPP values('NOT EXISTS');
+            end if;
+	end; //
+    delimiter ;
+    
+    /* call PROC1('DAC','CDAC');
+    DROP PROCEDURE PROC1;
+    select * from TEMPP; */
+    
+   -- 2).
+   
+   delimiter //
+   create function FUNC1(a float,b float,c float)
+   returns boolean
+   deterministic
+   begin
+			if( (a+b)>c and (b+c)>a and (c+a)>b ) then
+            return TRUE;
+            else 
+            return FALSE;
+            end if;
+	end; //
+    delimiter ;
+    
+ -- SELECT FUNC1(1,2,4) FROM DUAL;
+
+    
+
